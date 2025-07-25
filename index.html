@@ -3,185 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Café Morning Brew - Menu & Events</title>
+    <title>Morning Brew Café | Menu & Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
         body {
-            max-width: 1200px;
+            background-color: #f8f4e9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f9f7f2;
-            color: #333;
         }
+        
         header {
-            text-align: center;
-            padding: 20px 0;
-            background-color: #8c5e24;
+            background: linear-gradient(135deg, #8c5e24 0%, #5c3a0e 100%);
             color: white;
-            border-radius: 10px;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            color: #8c5e24;
+            border-bottom: 2px solid #f0e6d3;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .section-title i {
+            margin-right: 12px;
+            font-size: 1.8rem;
+        }
+        
+        .menu-category {
             margin-bottom: 25px;
         }
-        .container {
+        
+        .category-title {
+            color: #5c3a0e;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
             display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
+            align-items: center;
         }
-        .section {
-            flex: 1;
-            min-width: 300px;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        
+        .category-title i {
+            margin-right: 10px;
         }
-        h2 {
-            color: #8c5e24;
-            border-bottom: 2px solid #e8d9c5;
-            padding-bottom: 10px;
-        }
-        .hours {
-            background-color: #f1e9db;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-            font-weight: bold;
-        }
+        
         .menu-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px dashed #e0d5c1;
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
         }
-        .event {
-            padding: 15px;
-            margin: 15px 0;
-            background-color: #f8f4ec;
-            border-left: 4px solid #8c5e24;
-            border-radius: 0 5px 5px 0;
+        
+        .menu-item:last-child {
+            border-bottom: none;
         }
-        .event-date {
-            font-weight: bold;
+        
+        .item-name {
+            font-weight: 500;
+        }
+        
+        .item-price {
             color: #8c5e24;
+            font-weight: 600;
         }
+        
+        .event {
+            padding: 18px;
+            margin-bottom: 20px;
+            background: #fdfaf1;
+            border-radius: 12px;
+            border-left: 4px solid #8c5e24;
+            transition: all 0.3s ease;
+        }
+        
+        .event:hover {
+            background: #fbf6e4;
+            transform: scale(1.02);
+        }
+        
+        .event-date {
+            display: flex;
+            align-items: center;
+            color: #8c5e24;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .event-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .hours-box {
+            background: #5c3a0e;
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .hours-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hours-title i {
+            margin-right: 12px;
+        }
+        
+        .hours-list {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .hours-time {
+            color: #f0c586;
+        }
+        
         footer {
             text-align: center;
-            margin-top: 30px;
+            padding: 30px 0;
             color: #777;
-            font-size: 0.9em;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
         }
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
+        
+        .qr-note {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+        
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            background: #8c5e24;
+            border-radius: 12px;
+            margin: 15px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .qr-code::after {
+            content: "QR Code";
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>☕ Café Morning Brew</h1>
-        <p>Fresh Coffee & Homemade Pastries</p>
-    </header>
-    
     <div class="container">
-        <section class="section">
-            <h2>Our Menu</h2>
-            <div class="menu">
-                <h3>Coffee & Drinks</h3>
-                <div class="menu-item">
-                    <span>Espresso</span>
-                    <span>$3.50</span>
+        <header>
+            <div class="logo">
+                <i class="fas fa-mug-hot"></i>
+            </div>
+            <h1>Morning Brew Café</h1>
+            <p class="tagline">Fresh coffee, homemade pastries, and a warm atmosphere</p>
+        </header>
+        
+        <div class="hours-box">
+            <h2 class="hours-title">
+                <i class="far fa-clock"></i> Opening Hours
+            </h2>
+            <div class="hours-list">
+                <div class="hours-item">
+                    <span>Monday - Friday</span>
+                    <span class="hours-time">7:00 AM - 3:00 PM</span>
                 </div>
-                <div class="menu-item">
-                    <span>Cappuccino</span>
-                    <span>$4.75</span>
+                <div class="hours-item">
+                    <span>Saturday</span>
+                    <span class="hours-time">7:30 AM - 4:00 PM</span>
                 </div>
-                <div class="menu-item">
-                    <span>Cold Brew</span>
-                    <span>$5.00</span>
+                <div class="hours-item">
+                    <span>Sunday</span>
+                    <span class="hours-time">8:00 AM - 2:00 PM</span>
                 </div>
-                <div class="menu-item">
-                    <span>Matcha Latte</span>
-                    <span>$5.25</span>
+            </div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-utensils"></i> Our Menu
+                </h2>
+                
+                <div class="menu-category">
+                    <h3 class="category-title">
+                        <i class="fas fa-coffee"></i> Coffee & Drinks
+                    </h3>
+                    <div class="menu-item">
+                        <span class="item-name">Espresso</span>
+                        <span class="item-price">$3.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Cappuccino</span>
+                        <span class="item-price">$4.75</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Cold Brew</span>
+                        <span class="item-price">$5.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Iced Latte</span>
+                        <span class="item-price">$5.25</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Hot Chocolate</span>
+                        <span class="item-price">$4.25</span>
+                    </div>
                 </div>
                 
-                <h3>Breakfast</h3>
-                <div class="menu-item">
-                    <span>Avocado Toast</span>
-                    <span>$9.50</span>
-                </div>
-                <div class="menu-item">
-                    <span>Breakfast Burrito</span>
-                    <span>$8.75</span>
-                </div>
-                <div class="menu-item">
-                    <span>Yogurt Parfait</span>
-                    <span>$7.25</span>
+                <div class="menu-category">
+                    <h3 class="category-title">
+                        <i class="fas fa-egg"></i> Breakfast
+                    </h3>
+                    <div class="menu-item">
+                        <span class="item-name">Avocado Toast</span>
+                        <span class="item-price">$9.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Breakfast Burrito</span>
+                        <span class="item-price">$8.75</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Yogurt Parfait</span>
+                        <span class="item-price">$7.25</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Breakfast Sandwich</span>
+                        <span class="item-price">$8.50</span>
+                    </div>
                 </div>
                 
-                <h3>Pastries</h3>
-                <div class="menu-item">
-                    <span>Croissant</span>
-                    <span>$3.75</span>
-                </div>
-                <div class="menu-item">
-                    <span>Blueberry Muffin</span>
-                    <span>$4.25</span>
-                </div>
-                <div class="menu-item">
-                    <span>Cinnamon Roll</span>
-                    <span>$4.95</span>
+                <div class="menu-category">
+                    <h3 class="category-title">
+                        <i class="fas fa-cookie"></i> Pastries
+                    </h3>
+                    <div class="menu-item">
+                        <span class="item-name">Croissant</span>
+                        <span class="item-price">$3.75</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Blueberry Muffin</span>
+                        <span class="item-price">$4.25</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Cinnamon Roll</span>
+                        <span class="item-price">$4.95</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Chocolate Chip Scone</span>
+                        <span class="item-price">$3.95</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="hours">
-                <h3>Opening Hours</h3>
-                <p>Monday - Sunday: 7:00 AM - 3:00 PM</p>
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="far fa-calendar-alt"></i> Upcoming Events
+                </h2>
+                
+                <div class="event">
+                    <div class="event-date">
+                        <i class="far fa-calendar"></i> Mon, July 28 - 9:00 AM
+                    </div>
+                    <h3 class="event-title">Coffee Tasting Workshop</h3>
+                    <p>Discover different coffee origins and brewing methods with our expert baristas.</p>
+                </div>
+                
+                <div class="event">
+                    <div class="event-date">
+                        <i class="far fa-calendar"></i> Wed, July 30 - 10:00 AM
+                    </div>
+                    <h3 class="event-title">Live Acoustic Music</h3>
+                    <p>Enjoy local artists while you sip your coffee. Featuring Sarah Johnson.</p>
+                </div>
+                
+                <div class="event">
+                    <div class="event-date">
+                        <i class="far fa-calendar"></i> Fri, Aug 1 - 8:00 AM
+                    </div>
+                    <h3 class="event-title">Pastry Baking Class</h3>
+                    <p>Learn to make croissants from our master baker. Limited spots available!</p>
+                </div>
+                
+                <div class="event">
+                    <div class="event-date">
+                        <i class="far fa-calendar"></i> Sat, Aug 2 - 11:00 AM
+                    </div>
+                    <h3 class="event-title">Latte Art Competition</h3>
+                    <p>Watch talented baristas create amazing coffee art. Vote for your favorite!</p>
+                </div>
+                
+                <div class="event">
+                    <div class="event-date">
+                        <i class="far fa-calendar"></i> Sun, Aug 3 - 1:00 PM
+                    </div>
+                    <h3 class="event-title">Sunday Jazz Brunch</h3>
+                    <p>Special brunch menu with live jazz trio. Reservations recommended.</p>
+                </div>
             </div>
-        </section>
+        </div>
         
-        <section class="section">
-            <h2>Upcoming Events</h2>
-            <div class="events">
-                <div class="event">
-                    <div class="event-date">Mon, July 28 - 9:00 AM</div>
-                    <h3>Coffee Tasting Workshop</h3>
-                    <p>Discover different coffee origins and brewing methods</p>
-                </div>
-                
-                <div class="event">
-                    <div class="event-date">Wed, July 30 - 10:00 AM</div>
-                    <h3>Live Acoustic Music</h3>
-                    <p>Enjoy local artists while you sip your coffee</p>
-                </div>
-                
-                <div class="event">
-                    <div class="event-date">Fri, Aug 1 - 8:00 AM</div>
-                    <h3>Pastry Baking Class</h3>
-                    <p>Learn to make croissants from our master baker</p>
-                </div>
-                
-                <div class="event">
-                    <div class="event-date">Sat, Aug 2 - 11:00 AM</div>
-                    <h3>Latte Art Competition</h3>
-                    <p>Watch baristas create amazing coffee art</p>
-                </div>
-                
-                <div class="event">
-                    <div class="event-date">Sun, Aug 3 - 1:00 PM</div>
-                    <h3>Sunday Jazz Brunch</h3>
-                    <p>Special brunch menu with live jazz trio</p>
-                </div>
+        <footer>
+            <p>123 Coffee Street, Brewville, CA 12345</p>
+            <p><i class="fas fa-phone"></i> (555) 123-4567 | <i class="fas fa-envelope"></i> info@morningbrew.com</p>
+            
+            <div class="qr-note">
+                <p>Scan to save our menu and events to your phone</p>
+                <div class="qr-code"></div>
             </div>
-        </section>
+        </footer>
     </div>
-    
-    <footer>
-        <p>123 Main Street, Coffeeville | (555) 123-4567</p>
-        <p>Scan QR code to save this menu to your phone</p>
-    </footer>
 </body>
 </html>
